@@ -1,2 +1,0 @@
-# citadel-be
-node app
