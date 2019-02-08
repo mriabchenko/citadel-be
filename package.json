@@ -1,0 +1,32 @@
+{
+  "name": "citadel",
+  "version": "1.0.0",
+  "description": "citadel MEAN stack app",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon",
+    "test": "mocha --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nikolayr1/citadel.git"
+  },
+  "author": "Nikolay_R",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nikolayr1/citadel/issues"
+  },
+  "homepage": "https://github.com/nikolayr1/citadel#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "mongoose": "^5.4.6",
+    "rxjs": "^6.4.0",
+    "thruway.js": "^2.0.0-beta3",
+    "ws": "^2.3.1"
+  },
+  "devDependencies": {
+    "mocha": "^5.2.0",
+    "nodemon": "^1.18.9"
+  }
+}
