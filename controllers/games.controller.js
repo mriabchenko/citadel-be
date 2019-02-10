@@ -34,9 +34,17 @@ exports.delete = function(req, res) {
 };
 
 exports.join = (gameId, user) => {
-    Game.findById(gameId, function(err, game) {
-        const player = new Player();
-        player.initFromUserInfo(user);
-        // game.addPlayer(player);
-    });
+    return new Promise((resolve, reject) => {
+        Game.findById(gameId, function(err, game) {
+            const player = new Player();
+            player.initFromUserInfo(user);
+            const canJoin = game.canJoin(player);
+            if (canJoin) {
+                game.addPlayer(player);
+                game.save();
+                resolve(true);
+            }
+            resolve(false);
+        });
+    })
 };

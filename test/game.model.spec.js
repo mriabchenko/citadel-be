@@ -106,11 +106,30 @@ describe('Game model', () => {
         assert.equal(game.players[0].districtOptions.length, 2);
     });
 
-    it('should check join availability', () => {
+    it('should check join availability (empty game)', () => {
         const player = new PlayerModel();
+        player.uid = 'test';
+        game.players = [];
         assert.equal(game.canJoin(player), true);
+    });
+
+    it('should check join availability (free seats game)', () => {
+        const player = new PlayerModel();
+        player.uid = 'test';
+        game.config.maxPlayers = game.players.length + 1;
+        assert.equal(game.canJoin(player), true);
+    });
+
+    it('should check join availability (no free seats game)', () => {
+        const player = new PlayerModel();
+        player.uid = 'test';
         game.config.maxPlayers = 4;
         assert.equal(game.canJoin(player), false);
+
+    }); it('should check join availability (already joined game)', () => {
+        const player = new PlayerModel();
+        player.uid = 'test';
+        assert.equal(game.canJoin(player), true);
         game.addPlayer(player);
         assert.equal(game.canJoin(player), false);
     });

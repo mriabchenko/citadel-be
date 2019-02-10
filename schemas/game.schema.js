@@ -55,9 +55,9 @@ GameSchema.methods.start = function () {
 
 GameSchema.methods.canJoin = function (playerModel) {
     const uid = playerModel.uid;
-    if (!this.players.find(p => p.uid ===uid)) {
-        return false;
-    } else if (this.players.length >= this.config.maxPlayers) {
+    const isAlreadyInTheGame = !!this.players.map(p => p.uid).includes(uid);
+    const theGameIsFull = this.players.length >= this.config.maxPlayers;
+    if (isAlreadyInTheGame || theGameIsFull) {
         return false;
     } else {
         return true;
