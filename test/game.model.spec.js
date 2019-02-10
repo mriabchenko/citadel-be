@@ -105,4 +105,13 @@ describe('Game model', () => {
         assert.equal(game.districtsDeck.cards.length, districtsDeckLength - playersNumber * 2);
         assert.equal(game.players[0].districtOptions.length, 2);
     });
+
+    it('should check join availability', () => {
+        const player = new PlayerModel();
+        assert.equal(game.canJoin(player), true);
+        game.config.maxPlayers = 4;
+        assert.equal(game.canJoin(player), false);
+        game.addPlayer(player);
+        assert.equal(game.canJoin(player), false);
+    });
 });

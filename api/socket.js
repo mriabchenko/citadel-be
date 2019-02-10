@@ -16,7 +16,7 @@ module.exports = io => {
             });
         });
         socket.on('game.join', (req, callback) => {
-            gamesController.join(req.gameId, req.player)
+            gamesController.join(req.gameId, req.user)
         });
     });
 };

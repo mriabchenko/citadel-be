@@ -1,4 +1,5 @@
 const Game = require('./../models/game.model');
+const Player = require('./../models/player.model');
 
 exports.create = config => {
     const newGame = new Game();
@@ -32,8 +33,10 @@ exports.delete = function(req, res) {
     });
 };
 
-exports.join = (gameId, player) => {
+exports.join = (gameId, user) => {
     Game.findById(gameId, function(err, game) {
-        console.log(game);
+        const player = new Player();
+        player.initFromUserInfo(user);
+        // game.addPlayer(player);
     });
 };
