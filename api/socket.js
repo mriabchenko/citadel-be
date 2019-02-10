@@ -7,7 +7,13 @@ module.exports = io => {
         Game.lobby().then(games => {
             socket.emit('lobby', games);
         });
-
-
+        socket.on('game.create', (config, callback) => {
+            gamesController.create(config).then(game => {
+                callback(game);
+                Game.lobby().then(games => {
+                    io.emit('lobby', games);
+                });
+            });
+        });
     });
 };
