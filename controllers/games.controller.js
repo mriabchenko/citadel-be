@@ -31,3 +31,9 @@ exports.delete = function(req, res) {
         res.json({ message: 'Game successfully deleted' });
     });
 };
+
+exports.join = (gameId, player) => {
+    Game.findById(gameId, function(err, game) {
+        console.log(game);
+    });
+};
