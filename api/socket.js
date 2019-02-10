@@ -3,9 +3,10 @@ const GameSchema = require('./../schemas/game.schema');
 const Game = require('./../models/game.model');
 const GameStatusEnum = require('./../enums/game-status.enum');
 
-function updateLobby(socketOrIo) {
+function updateLobby(socket) {
     Game.find({status: GameStatusEnum.gathering}).exec(function (err, games) {
-        socketOrIo.emit('lobby', games);
+        socket.broadcast.emit('lobby', games);
+        socket.emit('lobby', games);
     });
 }
 
@@ -23,13 +24,13 @@ module.exports = io => {
         socket.on('game.create', (config, callback) => {
             gamesController.create(config).then(game => {
                 callback(game);
-                updateLobby(io);
+                updateLobby(socket);
             });
         });
         socket.on('game.join', (req, callback) => {
             gamesController.join(req.gameId, req.user).then(joined => {
                 if (joined) {
-                    updateLobby(io);
+                    updateLobby(socket);
                     socket.join(req.gameId);
                     updateGame(req.gameId, io);
                 }
@@ -39,7 +40,7 @@ module.exports = io => {
         socket.on('game.leave', (req, callback) => {
             gamesController.leave(req.gameId, req.playerId).then(isInTheGame => {
                 if (!isInTheGame) {
-                    updateLobby(io);
+                    updateLobby(socket);
                     socket.leave(req.gameId);
                     updateGame(req.gameId, io);
                 }
