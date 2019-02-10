@@ -16,7 +16,12 @@ app.listen(port, function () {
     console.log(`Server started on port ${port}...`);
 });
 
-// socket
-// const Thruway = require("thruway.js");
-// const wamp = new Thruway.Client('wss://demo.crossbar.io/ws', 'realm1');
-// wamp.publish('com.myapp.counter', '34');
+// Socket
+const server = require('http').Server(app);
+const io = require('socket.io')(server);
+
+
+server.listen(80);
+
+const socketApi = require('./api/socket');
+socketApi(io);

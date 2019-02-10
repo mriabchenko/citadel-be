@@ -52,3 +52,7 @@ GameSchema.methods.start = function() {
         p.giveDistrictOption(district2);
     });
 };
+
+GameSchema.statics.lobby = function () {
+    return this.find({status: GameStatusEnum.gathering});
+};
