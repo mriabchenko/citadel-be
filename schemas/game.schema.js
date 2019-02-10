@@ -53,9 +53,14 @@ GameSchema.methods.start = function () {
     });
 };
 
+GameSchema.methods.isAlreadyInTheGame = function (playerModel) {
+    const uid = playerModel.uid;
+    return !!this.players.map(p => p.uid).includes(uid);
+};
+
 GameSchema.methods.canJoin = function (playerModel) {
     const uid = playerModel.uid;
-    const isAlreadyInTheGame = !!this.players.map(p => p.uid).includes(uid);
+    const isAlreadyInTheGame = this.isAlreadyInTheGame(playerModel);
     const theGameIsFull = this.players.length >= this.config.maxPlayers;
     if (isAlreadyInTheGame || theGameIsFull) {
         return false;

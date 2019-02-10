@@ -25,5 +25,13 @@ module.exports = io => {
                 callback(joined);
             })
         });
+        socket.on('game.leave', (req, callback) => {
+            gamesController.leave(req.gameId, req.playerId).then(isInTheGame => {
+                if (!isInTheGame) {
+                    updateLobby(io);
+                }
+                callback(isInTheGame);
+            })
+        });
     });
 };
