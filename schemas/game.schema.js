@@ -68,7 +68,3 @@ GameSchema.methods.canJoin = function (playerModel) {
         return true;
     }
 };
-
-GameSchema.statics.lobby = function () {
-    return this.find({status: GameStatusEnum.gathering});
-};
