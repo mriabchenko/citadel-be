@@ -23,5 +23,5 @@ const io = require('socket.io')(server);
 
 server.listen(80);
 
-const socketApi = require('./api/socket');
+const socketApi = require('./src/api/socket');
 socketApi(io);

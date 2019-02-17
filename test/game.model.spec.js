@@ -1,14 +1,14 @@
 const assert = require('assert');
 const GameStatusEnum = require('./../enums/game-status.enum');
 const GameStatus = require('./../enums/game-status.enum');
-const DistrictsDeckModel = require('./../models/districts-deck.model');
-const GameConfigModel = require('./../models/game-config.model');
-const GameModel = require('./../models/game.model');
-const PlayerModel = require('./../models/player.model');
-const assassin = require('./../models/roles/assassin');
-const thief = require('./../models/roles/thief');
-const magician = require('./../models/roles/magician');
-const king = require('./../models/roles/king');
+const DistrictsDeckModel = require('../src/models/districts-deck.model');
+const GameConfigModel = require('../src/models/game-config.model');
+const GameModel = require('../src/models/game.model');
+const PlayerModel = require('../src/models/player.model');
+const assassin = require('../src/models/roles/assassin');
+const thief = require('../src/models/roles/thief');
+const magician = require('../src/models/roles/magician');
+const king = require('../src/models/roles/king');
 
 
 describe('Game model', () => {

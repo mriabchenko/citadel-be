@@ -21,6 +21,7 @@
     "autobahn": "^18.10.2",
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
+    "googleapis": "^37.2.0",
     "mongoose": "^5.4.6",
     "socket.io": "^2.2.0",
     "ws": "^2.3.1"

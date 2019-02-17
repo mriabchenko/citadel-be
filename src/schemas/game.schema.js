@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const GameConfigSchema = require('./game-config.schema');
 const PlayerSchema = require('./player.schema');
 const DistrictsDeckSchema = require('./districts-deck.schema');
-const GameStatusEnum = require('./../enums/game-status.enum');
+const GameStatusEnum = require('../enums/game-status.enum');
 
 const GameSchema = module.exports = new mongoose.Schema({
     config: {type: GameConfigSchema, default: {}},

@@ -1,5 +1,5 @@
 const assert = require('assert');
-const DistrictsDeckModel = require('./../models/districts-deck.model');
+const DistrictsDeckModel = require('../src/models/districts-deck.model');
 
 describe('Districts deck model', () => {
     let deck;

@@ -1,7 +1,7 @@
 const assert = require('assert');
-const PlayerModel = require('./../models/player.model');
-const architect = require('../models/roles/architect');
-const DistrictModel = require('../models/district.model');
+const PlayerModel = require('../src/models/player.model');
+const architect = require('../src/models/roles/architect');
+const DistrictModel = require('../src/models/district.model');
 
 describe('Player model', () => {
     let player;

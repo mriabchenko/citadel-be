@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const DistrictSchema = require('./district.schema');
-const DISTRICTS = require('./../data/districts');
+const DISTRICTS = require('../data/districts');
 
 const DistrictsDeckSchema = module.exports = new mongoose.Schema({
     cards: {type: [DistrictSchema], default: []},

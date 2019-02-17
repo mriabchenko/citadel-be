@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const gameConfig = require('./../config/game');
+const gameConfig = require('../../config/game');
 
 const GameConfigSchema = new mongoose.Schema({
     creatorId: {type: String, required: true},
