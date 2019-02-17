@@ -67,3 +67,15 @@ exports.leave = (gameId, playerId) => {
         });
     })
 };
+
+exports.playerReady = (gameId, playerId, ready) => {
+    return new Promise((resolve, reject) => {
+        Game.findById(gameId, function(err, game) {
+            if (game) {
+                game.players.id(playerId).setReadiness(ready);
+                game.save();
+                resolve();
+            }
+        });
+    })
+};

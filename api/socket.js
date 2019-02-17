@@ -47,5 +47,11 @@ module.exports = io => {
                 callback(isInTheGame);
             })
         });
+        socket.on('game.player.ready', (req, callback) => {
+            gamesController.playerReady(req.gameId, req.playerId, req.ready).then(() => {
+                updateGame(req.gameId, io);
+                callback();
+            })
+        });
     });
 };
