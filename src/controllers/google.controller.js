@@ -17,7 +17,7 @@ function getConnectionUrl(auth) {
     return auth.generateAuthUrl({
         access_type: 'offline',
         prompt: 'consent',
-        scope: defaultScope
+        scope: googleConfig.defaultScope
     });
 }
 

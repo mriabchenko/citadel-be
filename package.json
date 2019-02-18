@@ -19,9 +19,11 @@
   "homepage": "https://github.com/nikolayr1/citadel#readme",
   "dependencies": {
     "autobahn": "^18.10.2",
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
     "googleapis": "^37.2.0",
+    "jsonwebtoken": "^8.4.0",
     "mongoose": "^5.4.6",
     "socket.io": "^2.2.0",
     "ws": "^2.3.1"

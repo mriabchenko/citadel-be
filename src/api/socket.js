@@ -1,4 +1,5 @@
 const gamesController = require('./../controllers/games.controller');
+const googleController = require('./../controllers/google.controller');
 const GameSchema = require('./../schemas/game.schema');
 const Game = require('./../models/game.model');
 const GameStatusEnum = require('./../enums/game-status.enum');
@@ -20,7 +21,14 @@ function updateGame(gameId, io) {
 
 module.exports = io => {
     io.on('connection', socket => {
-        updateLobby(socket);
+        socket.on('login.url', (config, callback) => {
+            const loginUrl = googleController.urlGoogle();
+            callback(loginUrl);
+        });
+        socket.on('lobby', (config, callback) => {
+            updateLobby(socket);
+            callback();
+        });
         socket.on('game.create', (config, callback) => {
             gamesController.create(config).then(game => {
                 callback(game);
