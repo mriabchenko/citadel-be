@@ -1,3 +1,3 @@
 module.exports = {
-    database: 'mongodb://localhost:27017/citadel',
+    connectionString: 'mongodb://localhost:27017/citadel',
 };

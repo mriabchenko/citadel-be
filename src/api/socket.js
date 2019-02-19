@@ -1,5 +1,5 @@
-const gamesController = require('./../controllers/games.controller');
-const googleController = require('./../controllers/google.controller');
+const gamesController = require('../services/games.service');
+const googleController = require('../services/google.service');
 const GameSchema = require('./../schemas/game.schema');
 const Game = require('./../models/game.model');
 const GameStatusEnum = require('./../enums/game-status.enum');
