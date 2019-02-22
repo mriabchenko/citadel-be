@@ -15,6 +15,7 @@ app.use(jwt());
 
 // rest api routes
 app.use('/users', require('./src/controllers/users.conroller'));
+app.use('/games', require('./src/controllers/games.conroller'));
 
 // global error handler
 app.use(errorHandler);

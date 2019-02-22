@@ -3,7 +3,7 @@ const router = express.Router();
 const gameService = require('./../services/game.service');
 
 // routes
-router.post('/game/create', create);
+router.post('/create', create);
 
 module.exports = router;
 
