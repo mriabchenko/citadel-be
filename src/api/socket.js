@@ -1,6 +1,4 @@
-const gamesController = require('../services/games.service');
-const googleController = require('../services/google.service');
-const GameSchema = require('./../schemas/game.schema');
+const gameService = require('../services/game.service');
 const Game = require('./../models/game.model');
 const GameStatusEnum = require('./../enums/game-status.enum');
 
@@ -21,22 +19,12 @@ function updateGame(gameId, io) {
 
 module.exports = io => {
     io.on('connection', socket => {
-        socket.on('login.url', (config, callback) => {
-            const loginUrl = googleController.urlGoogle();
-            callback(loginUrl);
-        });
         socket.on('lobby', (config, callback) => {
             updateLobby(socket);
             callback();
         });
-        socket.on('game.create', (config, callback) => {
-            gamesController.create(config).then(game => {
-                callback(game);
-                updateLobby(socket);
-            });
-        });
         socket.on('game.join', (req, callback) => {
-            gamesController.join(req.gameId, req.user).then(joined => {
+            gameService.join(req.gameId, req.user).then(joined => {
                 if (joined) {
                     updateLobby(socket);
                     socket.join(req.gameId);
@@ -46,7 +34,7 @@ module.exports = io => {
             })
         });
         socket.on('game.leave', (req, callback) => {
-            gamesController.leave(req.gameId, req.playerId).then(isInTheGame => {
+            gameService.leave(req.gameId, req.playerId).then(isInTheGame => {
                 if (!isInTheGame) {
                     updateLobby(socket);
                     socket.leave(req.gameId);
@@ -56,7 +44,7 @@ module.exports = io => {
             })
         });
         socket.on('game.player.ready', (req, callback) => {
-            gamesController.playerReady(req.gameId, req.playerId, req.ready).then(() => {
+            gameService.playerReady(req.gameId, req.playerId, req.ready).then(() => {
                 updateGame(req.gameId, io);
                 callback();
             })
