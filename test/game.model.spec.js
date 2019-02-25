@@ -1,6 +1,5 @@
 const assert = require('assert');
-const GameStatusEnum = require('./../enums/game-status.enum');
-const GameStatus = require('./../enums/game-status.enum');
+const GameStatusEnum = require('./../src/enums/game-status.enum');
 const DistrictsDeckModel = require('../src/models/districts-deck.model');
 const GameConfigModel = require('../src/models/game-config.model');
 const GameModel = require('../src/models/game.model');
@@ -65,7 +64,7 @@ describe('Game model', () => {
                     }),
                 ],
                 districtsDeck: new DistrictsDeckModel(),
-                status: GameStatus.gathering,
+                status: GameStatusEnum.gathering,
             });
         game.districtsDeck.create();
         game.districtsDeck.shuffle();
@@ -108,27 +107,27 @@ describe('Game model', () => {
 
     it('should check join availability (empty game)', () => {
         const player = new PlayerModel();
-        player.uid = 'test';
+        player._id = 'test';
         game.players = [];
         assert.equal(game.canJoin(player), true);
     });
 
     it('should check join availability (free seats game)', () => {
         const player = new PlayerModel();
-        player.uid = 'test';
+        player._id = 'test';
         game.config.maxPlayers = game.players.length + 1;
         assert.equal(game.canJoin(player), true);
     });
 
     it('should check join availability (no free seats game)', () => {
         const player = new PlayerModel();
-        player.uid = 'test';
+        player._id = 'test';
         game.config.maxPlayers = 4;
         assert.equal(game.canJoin(player), false);
 
     }); it('should check join availability (already joined game)', () => {
         const player = new PlayerModel();
-        player.uid = 'test';
+        player._id = 'test';
         assert.equal(game.canJoin(player), true);
         game.addPlayer(player);
         assert.equal(game.canJoin(player), false);

@@ -1,6 +1,5 @@
 const assert = require('assert');
-const GameStatusEnum = require('./../enums/game-status.enum');
-const GameStatus = require('./../enums/game-status.enum');
+const GameStatusEnum = require('./../src/enums/game-status.enum');
 const DistrictsDeckModel = require('../src/models/districts-deck.model');
 const GameConfigModel = require('../src/models/game-config.model');
 const GameModel = require('../src/models/game.model');
@@ -65,7 +64,7 @@ describe('Integration', () => {
                     }),
                 ],
                 districtsDeck: new DistrictsDeckModel(),
-                status: GameStatus.gathering,
+                status: GameStatusEnum.gathering,
             });
         game.start();
     });

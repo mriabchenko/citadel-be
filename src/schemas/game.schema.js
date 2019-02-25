@@ -54,12 +54,11 @@ GameSchema.methods.start = function () {
 };
 
 GameSchema.methods.isAlreadyInTheGame = function (playerModel) {
-    const uid = playerModel.uid;
-    return !!this.players.map(p => p.uid).includes(uid);
+    const _id = playerModel._id;
+    return !!this.players.map(p => p._id).includes(_id);
 };
 
 GameSchema.methods.canJoin = function (playerModel) {
-    const uid = playerModel.uid;
     const isAlreadyInTheGame = this.isAlreadyInTheGame(playerModel);
     const theGameIsFull = this.players.length >= this.config.maxPlayers;
     if (isAlreadyInTheGame || theGameIsFull) {

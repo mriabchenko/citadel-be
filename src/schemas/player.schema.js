@@ -3,7 +3,6 @@ const RoleSchema = require('./role.schema');
 const DistrictSchema = require('./district.schema');
 
 const PlayerSchema = module.exports = new mongoose.Schema({
-    uid: {type: String, default: ''},
     name: {type: String, default: 'Игрок'},
     money: {type: Number, default: 0},
     photo: {type: '', default: ''},
@@ -17,7 +16,7 @@ const PlayerSchema = module.exports = new mongoose.Schema({
 
 PlayerSchema.methods.initFromUserInfo = function (userInfo) {
     this.name = userInfo.name;
-    this.uid = userInfo.uid;
+    this._id = userInfo._id;
 };
 
 PlayerSchema.methods.setReadiness = function (readiness) {
