@@ -54,8 +54,8 @@ GameSchema.methods.start = function () {
 };
 
 GameSchema.methods.isAlreadyInTheGame = function (playerModel) {
-    const _id = playerModel._id;
-    return !!this.players.map(p => p._id).includes(_id);
+    const pid = playerModel._id;
+    return !!this.players.id(pid);
 };
 
 GameSchema.methods.canJoin = function (playerModel) {
