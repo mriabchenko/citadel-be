@@ -5,6 +5,7 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const jwt = require('_helpers/jwt');
 const errorHandler = require('_helpers/error-handler');
+const socket = require('src/controllers/socket');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -20,15 +21,11 @@ app.use('/games', require('./src/controllers/games.conroller'));
 // global error handler
 app.use(errorHandler);
 
-// Socket
-const server = require('http').Server(app);
-const io = require('socket.io')(server);
-server.listen(80);
-const socketApi = require('./src/api/socket');
-socketApi(io);
-
-// Start Server
-const port = process.env.NODE_ENV === 'production' ? (process.env.PORT || 80) : 3000;
-app.listen(port, function () {
-    console.log(`Server started on port ${port}...`);
+// Start http server
+const httpPort = 3000;
+app.listen(httpPort, function () {
+    console.log(`Http server started on port ${httpPort}...`);
 });
+
+// Enable socket server
+socket.start(app);
