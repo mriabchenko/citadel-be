@@ -33,14 +33,18 @@ function socketApi() {
     IO.on('connection', socket => {
         updateLobby();
         socket.on('join', room => {
+            // console.log(socket.id, 'join room', room);
             socket.join(room);
+            updateGame(room);
         });
         socket.on('leave', room => {
+            // console.log('socket.id, leave room', room);
             socket.leave(room);
+            updateGame(room);
         });
         socket.on('game.player.ready', (req, callback) => {
             gameService.playerReady(req.gameId, req.playerId, req.ready).then(() => {
-                updateGame(req.gameId);
+                updateGame(req.gameId);1
                 callback();
             })
         });

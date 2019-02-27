@@ -37,21 +37,21 @@ exports.join = (gameId, user) => {
     return new Promise((resolve, reject) => {
         Game.findById(gameId, function(err, game) {
             if (err) {
-                resolve(false);
+                resolve(null);
             }
             const player = new Player();
             player.initFromUserInfo(user);
             const isAlreadyInTheGame = game.isAlreadyInTheGame(player);
             const canJoin = game.canJoin(player);
             if (isAlreadyInTheGame) {
-                resolve(true);
+                resolve(game);
             }
             if (canJoin) {
                 game.addPlayer(player);
                 game.save();
-                resolve(true);
+                resolve(game);
             }
-            resolve(false);
+            resolve(null);
         });
     })
 };
@@ -62,7 +62,9 @@ exports.leave = (gameId, playerId) => {
             if (game) {
                 game.removePlayer(playerId);
                 game.save();
-                resolve(false);
+                resolve(game);
+            } else {
+                resolve(null)
             }
         });
     })

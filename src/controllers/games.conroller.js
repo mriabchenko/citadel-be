@@ -26,18 +26,18 @@ function create(req, res, next) {
 
 function join(req, res, next) {
     gameService.join(req.body.gameId, req.body.user)
-        .then(canJoin => {
+        .then(joinedGame => {
             socket.updateLobby();
-            res.json(canJoin)
+            res.json(joinedGame)
         })
         .catch(err => next(err));
 }
 
 function leave(req, res, next) {
     gameService.leave(req.body.gameId, req.body.playerId)
-        .then(hasLeft => {
+        .then(leftGame => {
             socket.updateLobby();
-            res.json(hasLeft)
+            res.json(leftGame)
         })
         .catch(err => next(err));
 }
