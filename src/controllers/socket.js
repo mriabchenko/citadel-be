@@ -1,4 +1,3 @@
-const gameService = require('../services/game.service');
 const Game = require('../models/game.model');
 const GameStatusEnum = require('../enums/game-status.enum');
 
@@ -42,21 +41,7 @@ function socketApi() {
             socket.leave(room);
             updateGame(room);
         });
-        socket.on('game.player.ready', (req, callback) => {
-            gameService.playerReady(req.gameId, req.playerId, req.ready).then(() => {
-                updateGame(req.gameId);1
-                callback();
-            })
-        });
     });
 }
 
-function join(gameId) {
-    console.log(gameId);
-}
-
-function leave() {
-
-}
-
-module.exports = {start, updateLobby, updateGame, join, leave};
+module.exports = {start, updateLobby, updateGame};

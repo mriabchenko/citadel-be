@@ -7,6 +7,7 @@ const socket = require('./socket');
 router.post('/create', create);
 router.post('/join', join);
 router.post('/leave', leave);
+router.put('/:id/players/:playerId/status', playerSetStatus);
 
 module.exports = router;
 
@@ -38,6 +39,15 @@ function leave(req, res, next) {
         .then(leftGame => {
             socket.updateLobby();
             res.json(leftGame)
+        })
+        .catch(err => next(err));
+}
+
+function playerSetStatus(req, res, next) {
+    gameService.playerReady(req.params.id, req.params.playerId, req.body.ready)
+        .then(() => {
+            socket.updateGame(req.params.id);
+            res.json(req.body.ready)
         })
         .catch(err => next(err));
 }
