@@ -32,6 +32,12 @@ function updateGame(gameId) {
 function socketApi() {
     IO.on('connection', socket => {
         updateLobby();
+        socket.on('join', room => {
+            socket.join(room);
+        });
+        socket.on('leave', room => {
+            socket.leave(room);
+        });
         socket.on('game.player.ready', (req, callback) => {
             gameService.playerReady(req.gameId, req.playerId, req.ready).then(() => {
                 updateGame(req.gameId);

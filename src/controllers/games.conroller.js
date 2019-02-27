@@ -6,6 +6,7 @@ const socket = require('./socket');
 // routes
 router.post('/create', create);
 router.post('/join', join);
+router.post('/leave', leave);
 
 module.exports = router;
 
@@ -34,14 +35,9 @@ function join(req, res, next) {
 
 function leave(req, res, next) {
     gameService.leave(req.body.gameId, req.body.playerId)
-        .then(game => {
+        .then(hasLeft => {
             socket.updateLobby();
-            if (game) {
-                res.json(game);
-                socket.updateGame(game._id);
-            } else {
-                return {}
-            }
+            res.json(hasLeft)
         })
         .catch(err => next(err));
 }
